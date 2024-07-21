@@ -2,40 +2,41 @@
 pragma solidity ^0.8.18;
 
 contract ErrorHandling {
-    // Function to check if a value is within a specific range
-    function checkValue(uint _value) public pure {
-        require(_value > 15, "Input must be greater than 15");
+    
+    // Function to check if the input number is even and within a certain range
+    function checkEvenNumber(uint _number) public pure {
+        require(_number % 2 == 0, "Number must be even");
         
-        if (_value > 30) {
-            revert("Input must be less than 30");
+        if (_number > 100) {
+            revert("Number must be 100 or less");
         }
         
-        assert(_value == 20); // Assert that value must be exactly 20
+        assert(_number != 42); // Assert that number must not be 42
     }
 
-    // Function to check if a string length is within limits
-    function checkStringLength(string memory _input) public pure returns (string memory) {
-        uint length = bytes(_input).length;
-        require(length > 5, "String must be longer than 5 characters");
+    // Function to validate that a given address is not the zero address and is different from a specific address
+    function validateAddress(address _addr) public pure {
+        require(_addr != address(0), "Address must not be the zero address");
         
-        if (length > 20) {
-            revert("String must be shorter than 20 characters");
+        address specificAddr = 0x1234567890123456789012345678901234567890;
+        if (_addr == specificAddr) {
+            revert("Address must not be the specific address");
         }
         
-        assert(length != 10); // Assert that length must not be exactly 10
-        return _input;
+        assert(_addr != 0x1111111111111111111111111111111111111111); // Assert that address must not be a specific invalid address
     }
 
-    // Function to verify the sum of two numbers within a range
-    function verifySum(uint _a, uint _b) public pure returns (uint) {
-        uint sum = _a + _b;
-        require(sum > 10, "Sum must be greater than 10");
+    // Function to verify that the difference of two numbers is within a valid range
+    function verifyDifference(int _a, int _b) public pure returns (int) {
+        int diff = _a - _b;
+        require(diff >= -50, "Difference must be greater than or equal to -50");
         
-        if (sum > 50) {
-            revert("Sum must be less than or equal to 50");
+        if (diff > 50) {
+            revert("Difference must be 50 or less");
         }
         
-        assert(sum != 30); // Assert that sum must not be exactly 30
-        return sum;
+        assert(diff != 0); // Assert that difference must not be exactly zero
+        
+        return diff;
     }
 }
