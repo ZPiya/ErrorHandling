@@ -6,7 +6,7 @@
 ErrorHandling Solidity Smart Contract
 
 #### **Description**
-`ErrorHandling` is a Solidity smart contract designed to demonstrate various error handling mechanisms available in Solidity, including `require`, `revert`, and `assert`. This contract includes functions to validate numeric values, string lengths, and sums of numbers, providing practical examples of how to use these error handling statements effectively.
+`ErrorHandling` is a Solidity smart contract that demonstrates different error handling mechanisms in Solidity, including `require`, `revert`, and `assert`. The contract includes functions to validate numbers, addresses, and differences between numbers, providing practical examples of how each error handling mechanism operates.
 
 ---
 
@@ -16,7 +16,7 @@ ErrorHandling Solidity Smart Contract
 
 1. **Clone the Repository:**
    ```sh
-   git clone https://github.com/yourusername/ErrorHandling.git
+   git clone https://github.com/ZPiya/ErrorHandling.git
    cd ErrorHandling
    ```
 
@@ -43,24 +43,24 @@ ErrorHandling Solidity Smart Contract
 
 4. **Interact with the Contract:**
    - After deployment, the contract functions will appear in the "Deployed Contracts" section.
-   - You can interact with functions like `checkValue`, `checkStringLength`, and `verifySum` directly from the Remix interface.
+   - You can interact with functions like `checkEvenNumber`, `validateAddress`, and `verifyDifference` directly from the Remix interface.
 
    Example interactions:
    ```javascript
-   // Check if a value is within a specific range
-   await instance.checkValue(16); // This will pass
-   await instance.checkValue(31); // This will fail with revert error
-   await instance.checkValue(20); // This will fail with assert error
+   // Check if the number is even and within the specified range
+   await instance.checkEvenNumber(44); // This will pass
+   await instance.checkEvenNumber(101); // This will fail with revert error
+   await instance.checkEvenNumber(42); // This will fail with assert error
 
-   // Check if a string length is within limits
-   await instance.checkStringLength("Hello!"); // This will pass
-   await instance.checkStringLength("Short"); // This will fail with require error
-   await instance.checkStringLength("This string is too long to pass"); // This will fail with revert error
+   // Validate the address
+   await instance.validateAddress("0x0000000000000000000000000000000000000000"); // This will fail with require error
+   await instance.validateAddress("0x1234567890123456789012345678901234567890"); // This will fail with revert error
+   await instance.validateAddress("0x2222222222222222222222222222222222222222"); // This will pass
 
-   // Verify the sum of two numbers within a range
-   await instance.verifySum(5, 6); // This will pass
-   await instance.verifySum(25, 26); // This will fail with revert error
-   await instance.verifySum(15, 15); // This will fail with assert error
+   // Verify the difference between two numbers
+   let result = await instance.verifyDifference(30, 10); // This will pass
+   result = await instance.verifyDifference(100, 30); // This will fail with revert error
+   result = await instance.verifyDifference(50, 50); // This will fail with assert error
    ```
 
 ##### **Help**
@@ -83,3 +83,7 @@ For additional support, you can raise an issue on the project repository or seek
 
 #### **License**
 This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+---
+
+Feel free to reach out if you have any questions or need further assistance!
