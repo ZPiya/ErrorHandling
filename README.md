@@ -1,4 +1,4 @@
-### ErrorHandling Project
+### README for ErrorHandling Project
 
 ---
 
@@ -6,7 +6,7 @@
 ErrorHandling Solidity Smart Contract
 
 #### **Description**
-`ErrorHandling` is a Solidity smart contract designed to demonstrate various error handling mechanisms available in Solidity. This contract uses `require`, `revert`, and `assert` to manage and validate input values, showcasing how each mechanism works in practice. This contract serves as an educational tool to understand the nuances and appropriate use cases for these error handling statements.
+`ErrorHandling` is a Solidity smart contract designed to demonstrate various error handling mechanisms available in Solidity, including `require`, `revert`, and `assert`. This contract includes functions to validate numeric values, string lengths, and sums of numbers, providing practical examples of how to use these error handling statements effectively.
 
 ---
 
@@ -43,14 +43,24 @@ ErrorHandling Solidity Smart Contract
 
 4. **Interact with the Contract:**
    - After deployment, the contract functions will appear in the "Deployed Contracts" section.
-   - You can interact with the `trial` function and observe how different input values trigger `require`, `revert`, or `assert`.
+   - You can interact with functions like `checkValue`, `checkStringLength`, and `verifySum` directly from the Remix interface.
 
    Example interactions:
    ```javascript
-   // Call the trial function with various values
-   await instance.trial(10); // This will fail with require error
-   await instance.trial(35); // This will fail with revert error
-   await instance.trial(20); // This will pass, but assert will check if the value is exactly 20
+   // Check if a value is within a specific range
+   await instance.checkValue(16); // This will pass
+   await instance.checkValue(31); // This will fail with revert error
+   await instance.checkValue(20); // This will fail with assert error
+
+   // Check if a string length is within limits
+   await instance.checkStringLength("Hello!"); // This will pass
+   await instance.checkStringLength("Short"); // This will fail with require error
+   await instance.checkStringLength("This string is too long to pass"); // This will fail with revert error
+
+   // Verify the sum of two numbers within a range
+   await instance.verifySum(5, 6); // This will pass
+   await instance.verifySum(25, 26); // This will fail with revert error
+   await instance.verifySum(15, 15); // This will fail with assert error
    ```
 
 ##### **Help**
